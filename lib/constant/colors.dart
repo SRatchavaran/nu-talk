@@ -19,6 +19,7 @@ const disableColor = Color(0xff8c8c8c);
 const whiteColor = Color(0xffffffff);
 const blackColor = Color(0xff000000);
 const black54Color = Color(0xff343434);
+const black12Color = Color(0xff979797);
 const redColor = Color(0xfffd450d);
 
 const primaryText = Color(0xff080044);

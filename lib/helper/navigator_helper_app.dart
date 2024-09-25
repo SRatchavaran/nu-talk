@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutalk/constant/navigator.dart';
+import 'package:nutalk/feature/authentication/signup/screen.dart';
 import 'package:nutalk/feature/home/screen.dart';
 import 'package:nutalk/feature/kratoo/screen.dart';
 import 'package:nutalk/feature/main/screen.dart';
@@ -9,8 +10,6 @@ import 'package:nutalk/feature/setting/screen.dart';
 import '../feature/booking/screen.dart';
 import '../feature/chat/screen.dart';
 import '../feature/note/screen.dart';
-
-
 
 class CustomNavigatorHelperApp {
   static late final GoRouter router;
@@ -41,6 +40,9 @@ class CustomNavigatorHelperApp {
   static const kratooPath = '/kratoo';
   static const settingPath = '/setting';
 
+  static const signupPath = '/signup';
+  static const loginPath = '/login';
+
   CustomNavigatorHelperApp._internal() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
 
@@ -53,7 +55,7 @@ class CustomNavigatorHelperApp {
             routes: [
               GoRoute(
                 path: kratooPath,
-                name:  NavigatorRouteNameConstans.kratooPath,
+                name: NavigatorRouteNameConstans.kratooPath,
                 pageBuilder: (context, state) => getPage(child: const KratooScreen(), state: state),
               )
             ],
@@ -107,10 +109,20 @@ class CustomNavigatorHelperApp {
         name: NavigatorRouteNameConstans.settinPath,
         pageBuilder: (context, state) => getPage(child: const SettingScreen(), state: state),
       ),
+      GoRoute(
+        path: signupPath,
+        name: NavigatorRouteNameConstans.signupPath,
+        pageBuilder: (context, state) => getPage(child: const SignupScreen(), state: state),
+      ),
+      GoRoute(
+        path: loginPath,
+        name: NavigatorRouteNameConstans.loginPath,
+        pageBuilder: (context, state) => getPage(child: const SignupScreen(), state: state),
+      ),
     ];
     router = GoRouter(
       routes: routes,
-      initialLocation: homePath,
+      initialLocation: signupPath,
     );
   }
 

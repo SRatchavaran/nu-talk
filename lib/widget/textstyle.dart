@@ -4,6 +4,8 @@ import 'package:nutalk/constant.dart';
 enum TextStyleColor {
   primaryColor,
   secondaryColor,
+  disableColor,
+  errorColor
 }
 
 enum TextStyleSize { s12, s16, s17, s19, s20, s24, s45 }
@@ -18,6 +20,12 @@ extension TextStyleColorExtension on TextStyleColor {
 
       case TextStyleColor.secondaryColor:
         return secondaryText;
+
+      case TextStyleColor.disableColor:
+        return black12Color;
+
+      case TextStyleColor.errorColor:
+        return redColor;
 
       default:
         return null;

@@ -15,5 +15,14 @@
     "theme": "ธีม",
     "select_theme": "เลือกธีม",
     "logout": "ออกจากระบบ"
+  },
+  "auth":{
+    "signup":"ลงทะเบียน",
+    "input_email":"Email",
+    "input_email_err":"กรุณากรอก Email",
+    "input_password":"รหัสผ่าน",
+    "input_password_err":"กรุณากรอกรหัสผ่านมากกว่า 6 ตัว",
+    "input_confirm_password":"ยืนยันรหัสผ่าน",
+    "input_confirm_password_err":"กรุณากรอกรหัสผ่านอีกครั้ง"
   }
 }

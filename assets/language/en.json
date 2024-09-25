@@ -15,5 +15,14 @@
     "theme": "Theme",
     "select_theme": "Select theme",
     "logout": "Logout"
+  },
+  "auth":{
+    "signup":"Sign Up",
+    "input_email":"Email",
+    "input_email_err":"Please enter your email address.",
+    "input_password":"Password",
+    "input_password_err":"Please enter a password of more than 6 characters.",
+    "input_confirm_password":"Confirm Password",
+    "input_confirm_password_err":"Please enter your password again."
   }
 }

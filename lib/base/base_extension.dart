@@ -7,4 +7,8 @@ extension BuildContextProvider on BuildContext {
   MediaQueryData get media => MediaQuery.of(this);
 
   Size get mediaSize => MediaQuery.of(this).size;
+
+  void unFocusScope(){
+    FocusScope.of(this).unfocus();
+  }
 }

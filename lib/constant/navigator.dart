@@ -6,4 +6,7 @@ class NavigatorRouteNameConstans{
   static const bookingPath = 'booking';
 
   static const settinPath = 'setting';
+
+  static const signupPath = 'sign_up';
+  static const loginPath = 'log_in';
 }
