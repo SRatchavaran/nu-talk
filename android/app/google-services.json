@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "732396582602",
+    "project_id": "nutalk",
+    "storage_bucket": "nutalk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:732396582602:android:3b1fa12be2784e4ea72633",
+        "android_client_info": {
+          "package_name": "com.example.nutalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANesv4PH8zd3Igz8qQ9A-tFfHtY2FEZu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
