@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutalk/constant/navigator.dart';
 import 'package:nutalk/feature/home/screen.dart';
 import 'package:nutalk/feature/kratoo/screen.dart';
 import 'package:nutalk/feature/main/screen.dart';
+import 'package:nutalk/feature/setting/screen.dart';
 
 import '../feature/booking/screen.dart';
 import '../feature/chat/screen.dart';
 import '../feature/note/screen.dart';
+
+
 
 class CustomNavigatorHelperApp {
   static late final GoRouter router;
@@ -19,17 +23,14 @@ class CustomNavigatorHelperApp {
   GlobalKey<NavigatorState> bookingNavigatorKey = GlobalKey<NavigatorState>();
   GlobalKey<NavigatorState> kratooNavigatorKey = GlobalKey<NavigatorState>();
 
-  static final CustomNavigatorHelperApp _instance =
-      CustomNavigatorHelperApp._internal();
+  static final CustomNavigatorHelperApp _instance = CustomNavigatorHelperApp._internal();
 
   static CustomNavigatorHelperApp get instance => _instance;
   GoRouterDelegate get routerDelegate => router.routerDelegate;
 
-  GoRouteInformationParser get routeInformationParser =>
-      router.routeInformationParser;
+  GoRouteInformationParser get routeInformationParser => router.routeInformationParser;
 
-  BuildContext get context =>
-      router.routerDelegate.navigatorKey.currentContext!;
+  BuildContext get context => router.routerDelegate.navigatorKey.currentContext!;
 
   factory CustomNavigatorHelperApp() => _instance;
 
@@ -38,6 +39,7 @@ class CustomNavigatorHelperApp {
   static const bookingPath = '/booking';
   static const notePath = '/note';
   static const kratooPath = '/kratoo';
+  static const settingPath = '/setting';
 
   CustomNavigatorHelperApp._internal() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -51,9 +53,8 @@ class CustomNavigatorHelperApp {
             routes: [
               GoRoute(
                 path: kratooPath,
-                name: 'kratooPath',
-                pageBuilder: (context, state) =>
-                    getPage(child: const KratooScreen(), state: state),
+                name:  NavigatorRouteNameConstans.kratooPath,
+                pageBuilder: (context, state) => getPage(child: const KratooScreen(), state: state),
               )
             ],
           ),
@@ -62,9 +63,8 @@ class CustomNavigatorHelperApp {
             routes: [
               GoRoute(
                 path: chatRoomPath,
-                name: 'chatroomPath',
-                pageBuilder: (context, state) =>
-                    getPage(child: const ChatRoomScreen(), state: state),
+                name: NavigatorRouteNameConstans.chatPath,
+                pageBuilder: (context, state) => getPage(child: const ChatRoomScreen(), state: state),
               )
             ],
           ),
@@ -73,9 +73,8 @@ class CustomNavigatorHelperApp {
             routes: [
               GoRoute(
                 path: homePath,
-                name: 'homePath',
-                pageBuilder: (context, state) =>
-                    getPage(child: const HomeScreen(), state: state),
+                name: NavigatorRouteNameConstans.homePath,
+                pageBuilder: (context, state) => getPage(child: const HomeScreen(), state: state),
               )
             ],
           ),
@@ -83,10 +82,9 @@ class CustomNavigatorHelperApp {
             navigatorKey: bookingNavigatorKey,
             routes: [
               GoRoute(
-                path: bookingPath,
-                name: 'notePath',
-                pageBuilder: (context, state) =>
-                    getPage(child: const NoteScreen(), state: state),
+                path: notePath,
+                name: NavigatorRouteNameConstans.notePath,
+                pageBuilder: (context, state) => getPage(child: const NoteScreen(), state: state),
               )
             ],
           ),
@@ -94,16 +92,20 @@ class CustomNavigatorHelperApp {
             navigatorKey: noteNavigatorKey,
             routes: [
               GoRoute(
-                path: notePath,
-                name: 'bookingPath',
-                pageBuilder: (context, state) =>
-                    getPage(child: const BookingTimeScreen(), state: state),
+                path: bookingPath,
+                name: NavigatorRouteNameConstans.bookingPath,
+                pageBuilder: (context, state) => getPage(child: const BookingTimeScreen(), state: state),
               )
             ],
           ),
         ],
-        pageBuilder: (context, state, navigationShell) => getPage(
-            child: MainNavigatorBar(child: navigationShell), state: state),
+        pageBuilder: (context, state, navigationShell) =>
+            getPage(child: MainNavigatorBar(child: navigationShell), state: state),
+      ),
+      GoRoute(
+        path: settingPath,
+        name: NavigatorRouteNameConstans.settinPath,
+        pageBuilder: (context, state) => getPage(child: const SettingScreen(), state: state),
       ),
     ];
     router = GoRouter(
@@ -120,8 +122,7 @@ class CustomNavigatorHelperApp {
         const end = Offset.zero;
         const curve = Curves.ease;
 
-        var tween =
-            Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
 
         return SlideTransition(
           position: animation.drive(tween),

@@ -17,6 +17,15 @@ enum IconName {
   bottomBarIconCommunity,
   bottomBarIconNote,
   bottomBarIconBooking,
+  help1,
+  help2,
+  help3,
+  help4,
+  theme1,
+  theme2,
+  theme3,
+  theme4,
+  theme5
 }
 
 class CustomIcon extends StatelessWidget {
@@ -80,6 +89,33 @@ class CustomIcon extends StatelessWidget {
 
       case IconName.bottomBarIconCommunity:
         return _pngImage('comminity_icon');
+
+      case IconName.help1:
+        return _pngImage('help1');
+
+      case IconName.help2:
+        return _pngImage('help2');
+
+      case IconName.help3:
+        return _pngImage('help3');
+
+      case IconName.help4:
+        return _pngImage('help4');
+        
+      case IconName.theme1:
+        return _pngImage('theme1');
+
+      case IconName.theme2:
+        return _pngImage('theme2');
+
+      case IconName.theme3:
+        return _pngImage('theme3');
+
+      case IconName.theme4:
+        return _pngImage('theme4');
+
+      case IconName.theme5:
+        return _pngImage('theme5');
 
       default:
         return Container();

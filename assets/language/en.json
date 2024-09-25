@@ -6,5 +6,14 @@
     "home": "Home",
     "note": "Note",
     "booking": "Booking"
+  },
+  "setting":{
+    "title": "Edit Profile",
+    "name": "Name : ",
+    "age": "Age : ",
+    "gender": "Gender : ",
+    "theme": "Theme",
+    "select_theme": "Select theme",
+    "logout": "Logout"
   }
 }
