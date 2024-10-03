@@ -10,10 +10,6 @@ class SettingViewModel extends BaseViewModel {
 
   SettingViewModel(BuildContext context) : _mainProvider = context.provide();
 
-  Color get primaryColorTheme => _mainProvider.primaryColorTheme;
-
-  Color get secondaryColorTheme => _mainProvider.secondaryColorTheme;
-
   int get oldTheme => _mainProvider.oldTheme;
 
   int _index = 1;
@@ -30,12 +26,12 @@ class SettingViewModel extends BaseViewModel {
     _index = _mainProvider.theme.index;
   }
 
-  void setTheme({int? index}) {
+  void setTheme(BuildContext context, {int? index}) {
     _index = index ?? 1;
-    _mainProvider.setTheme(index ?? oldTheme, setTheme: false);
+    _mainProvider.setTheme(context, index ?? oldTheme, setTheme: false);
   }
 
-  void save() {
-    _mainProvider.setTheme(_index, setTheme: true);
+  void save(BuildContext context) {
+    _mainProvider.setTheme(context, _index, setTheme: true);
   }
 }

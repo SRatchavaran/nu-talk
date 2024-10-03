@@ -19,6 +19,7 @@ const disableColor = Color(0xff8c8c8c);
 const whiteColor = Color(0xffffffff);
 const blackColor = Color(0xff000000);
 const black54Color = Color(0xff343434);
+const black12Color = Color(0xff979797);
 const redColor = Color(0xfffd450d);
 
 const primaryText = Color(0xff080044);
@@ -30,3 +31,56 @@ const blackTheme3 = Color(0x50bdc18c);
 const blackTheme4 = Color(0x50fff4d1);
 const blackTheme5 = Color(0xffdeecfd);
 
+Color primaryColor(BuildContext context) {
+  var theme = context.provide<MainProvider>(listen: false).theme;
+  switch (theme) {
+    case CustomTheme.theme1:
+      return primaryTheme1;
+    case CustomTheme.theme2:
+      return primaryTheme2;
+    case CustomTheme.theme3:
+      return primaryTheme3;
+    case CustomTheme.theme4:
+      return primaryTheme4;
+    case CustomTheme.theme5:
+      return primaryTheme5;
+    default:
+      return primaryTheme1;
+  }
+}
+
+Color secondaryColor(BuildContext context) {
+  var theme = context.provide<MainProvider>(listen: false).theme;
+  switch (theme) {
+    case CustomTheme.theme1:
+      return secondaryTheme1;
+    case CustomTheme.theme2:
+      return secondaryTheme2;
+    case CustomTheme.theme3:
+      return secondaryTheme3;
+    case CustomTheme.theme4:
+      return secondaryTheme4;
+    case CustomTheme.theme5:
+      return secondaryTheme5;
+    default:
+      return secondaryTheme1;
+  }
+}
+
+Color blackThemeColor(BuildContext context) {
+  var theme = context.provide<MainProvider>(listen: false).theme;
+  switch (theme) {
+    case CustomTheme.theme1:
+      return blackTheme1;
+    case CustomTheme.theme2:
+      return blackTheme2;
+    case CustomTheme.theme3:
+      return blackTheme3;
+    case CustomTheme.theme4:
+      return blackTheme4;
+    case CustomTheme.theme5:
+      return blackTheme5;
+    default:
+      return blackTheme1;
+  }
+}

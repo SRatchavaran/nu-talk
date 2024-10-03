@@ -1,13 +1,31 @@
 {
   "nu_talk": "NU Talk",
-  "bottom_bar":{
+  "common": {
+    "choose_img": "เลือกโปรไฟล์",
+    "change_img": "เปลี่ยนรูปภาพโปรไฟล์",
+    "gender": {
+      "title": "เพศสภาพ",
+      "male": "เพศชาย",
+      "female": "เพศหญิง",
+      "other": "ไม่ระบุ"
+    },
+    "age": "อายุ",
+    "alert": "ขออภัยค่ะ",
+    "err": {
+      "input_name": "กรุณาระบุชื่อ",
+      "repeat_email": "ชื่อถูกใช้แล้ว กรุณาระบุชื่อใหม่",
+      "repeat_name": "Email ถูกใช้แล้ว กรุณาระบุ Email ใหม่",
+      "system_err": "ระบบขัดข้อง กรุณาลองใหม่ภายหลัง"
+    }
+  },
+  "bottom_bar": {
     "community": "KRATOO",
     "chat": "พูดคุย",
     "home": "หน้าหลัก",
     "note": "โน้ต",
     "booking": "นัดหมาย"
   },
-  "setting":{
+  "setting": {
     "title": "แก้ไขโปรไฟล์",
     "name": "ชื่อ:",
     "age": "อายุ:",
@@ -15,5 +33,24 @@
     "theme": "ธีม",
     "select_theme": "เลือกธีม",
     "logout": "ออกจากระบบ"
+  },
+  "auth": {
+    "signup": "ลงทะเบียน",
+    "input_email": "Email",
+    "input_email_err": "กรุณากรอก Email",
+    "input_password": "รหัสผ่าน",
+    "input_password_err": "กรุณากรอกรหัสผ่านมากกว่า 6 ตัว",
+    "input_confirm_password": "ยืนยันรหัสผ่าน",
+    "input_confirm_password_err": "กรุณากรอกรหัสผ่านอีกครั้ง",
+    "signin": "เข้าสู่ระบบ",
+    "have_user": "หรือ\nหากมีบัญชีอยู่แล้ว กรูณาเข้าสู่ระบบ",
+    "signin_err": "ไม่พบ Email นี้ กรุณาลงทะเบียน"
+  },
+  "profile": {
+    "title": "โปรไฟล์",
+    "username_hint": "ชื่อ (เฉพาะภาษาอังกฤษและตัวเลขเท่านั้น)",
+    "select_gender": "เลือกเพศสภาพขงคุณ",
+    "select_age": "เลือกอายุของคุณ",
+    "username_err": "ชื่อของคุณไม่ถูกต้อง"
   }
 }

@@ -6,10 +6,16 @@ import 'package:nutalk/helper/navigator_helper_app.dart';
 import 'package:nutalk/provider/main_provider.dart';
 import 'package:nutalk/provider/navigator_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   CustomNavigatorHelperApp.instance;
   await EasyLocalization.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   WidgetsFlutterBinding.ensureInitialized();
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
@@ -34,7 +40,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ListenableProvider<NavigatorProvider>(create: (_) => NavigatorProvider()),
-        ListenableProvider<MainProvider>(create: (_)=> MainProvider())
+        ListenableProvider<MainProvider>(create: (_) => MainProvider())
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,

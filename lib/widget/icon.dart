@@ -55,7 +55,7 @@ class CustomIcon extends StatelessWidget {
         return _pngImage('profile4');
 
       case IconName.profileUser5:
-        return _pngImage('profile4');
+        return _pngImage('profile5');
 
       case IconName.profileUser6:
         return _pngImage('profile6');
@@ -101,7 +101,7 @@ class CustomIcon extends StatelessWidget {
 
       case IconName.help4:
         return _pngImage('help4');
-        
+
       case IconName.theme1:
         return _pngImage('theme1');
 

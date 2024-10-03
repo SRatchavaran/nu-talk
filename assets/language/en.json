@@ -1,13 +1,30 @@
 {
   "nu_talk": "NU Talk",
-  "bottom_bar":{
+  "common": {
+    "choose_img": "Choose Profile",
+    "change_img": "Change Image",
+    "gender": {
+      "title": "Gender",
+      "male": "Male",
+      "female": "Female",
+      "other": "Other"
+    },
+    "age": "Age",
+    "alert": "Sorry",
+    "err": {
+      "input_name": "Please provide your name",
+      "repeat_name": "The name is already used. Please provide a new name.",
+      "system_err": "System failed. Please try again later."
+    }
+  },
+  "bottom_bar": {
     "community": "KRATOO",
     "chat": "Chat",
     "home": "Home",
     "note": "Note",
     "booking": "Booking"
   },
-  "setting":{
+  "setting": {
     "title": "Edit Profile",
     "name": "Name : ",
     "age": "Age : ",
@@ -15,5 +32,24 @@
     "theme": "Theme",
     "select_theme": "Select theme",
     "logout": "Logout"
+  },
+  "auth": {
+    "signup": "Sign Up",
+    "input_email": "Email",
+    "input_email_err": "Please enter your email address.",
+    "input_password": "Password",
+    "input_password_err": "Please enter a password of more than 6 characters.",
+    "input_confirm_password": "Confirm Password",
+    "input_confirm_password_err": "Please enter your password again.",
+    "signin": "Sign In",
+    "have_user": "Or\nAlready have an account? Please Sign In.",
+    "signin_err": "This email was not found. Please Sign Up."
+  },
+  "profile": {
+    "title": "Profile",
+    "username_hint": "Name (English and numbers only)",
+    "select_gender": "Select your gender",
+    "select_age": "Select your age",
+    "username_err": "Your name is incorrect."
   }
 }
