@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nutalk/constant/navigator.dart';
+import 'package:nutalk/feature/authentication/login/screen.dart';
 import 'package:nutalk/feature/authentication/signup/screen.dart';
 import 'package:nutalk/feature/home/screen.dart';
 import 'package:nutalk/feature/kratoo/screen.dart';
 import 'package:nutalk/feature/main/screen.dart';
 import 'package:nutalk/feature/setting/screen.dart';
+import 'package:nutalk/feature/setup_profile/screen.dart';
 
 import '../feature/booking/screen.dart';
 import '../feature/chat/screen.dart';
@@ -33,6 +35,8 @@ class CustomNavigatorHelperApp {
 
   factory CustomNavigatorHelperApp() => _instance;
 
+  // var isLogin = SharePreferenceHelper.getUserLoggedInSharedPreference();
+
   static const homePath = '/home';
   static const chatRoomPath = '/chatroom';
   static const bookingPath = '/booking';
@@ -42,6 +46,7 @@ class CustomNavigatorHelperApp {
 
   static const signupPath = '/signup';
   static const loginPath = '/login';
+  static const setupPeofilePath = 'setup-profile';
 
   CustomNavigatorHelperApp._internal() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -106,23 +111,31 @@ class CustomNavigatorHelperApp {
       ),
       GoRoute(
         path: settingPath,
-        name: NavigatorRouteNameConstans.settinPath,
+        name: NavigatorRouteNameConstans.settingPath,
         pageBuilder: (context, state) => getPage(child: const SettingScreen(), state: state),
       ),
       GoRoute(
         path: signupPath,
         name: NavigatorRouteNameConstans.signupPath,
         pageBuilder: (context, state) => getPage(child: const SignupScreen(), state: state),
+        routes: [
+          GoRoute(
+            path: setupPeofilePath,
+            name: NavigatorRouteNameConstans.setupProfilePath,
+            pageBuilder: (context, state) => getPage(child: const SetupProfileScreen(), state: state),
+          ),
+        ],
       ),
       GoRoute(
         path: loginPath,
         name: NavigatorRouteNameConstans.loginPath,
-        pageBuilder: (context, state) => getPage(child: const SignupScreen(), state: state),
+        pageBuilder: (context, state) => getPage(child: const SigninScreen(), state: state),
       ),
     ];
+
     router = GoRouter(
       routes: routes,
-      initialLocation: signupPath,
+      initialLocation: homePath,
     );
   }
 

@@ -3,13 +3,24 @@ import 'dart:developer';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:nutalk/base/base_extension.dart';
 import 'package:nutalk/base/base_widget.dart';
 import 'package:nutalk/constant.dart';
 import 'package:nutalk/feature/main/viewmodel.dart';
+import 'package:nutalk/helper/share_preference_helper.dart';
 import 'package:nutalk/provider/navigator_provider.dart';
 import 'package:nutalk/widget/icon.dart';
 import 'package:nutalk/widget/textstyle.dart';
+
+class MainNavigatorBarArguments {
+  final bool initScreen;
+
+  MainNavigatorBarArguments({
+    this.initScreen = true,
+  });
+}
 
 class MainNavigatorBar extends StatelessWidget {
   final StatefulNavigationShell child;
@@ -57,7 +68,7 @@ class MainNavigatorBar extends StatelessWidget {
                         margin: const EdgeInsets.symmetric(horizontal: 2.0),
                         decoration: BoxDecoration(
                           shape: BoxShape.circle,
-                          color: model.currentIndex == i ? whiteColor : blackTheme1,
+                          color: model.currentIndex == i ? whiteColor : blackThemeColor(context),
                         ),
                       );
                     },
@@ -73,17 +84,18 @@ class MainNavigatorBar extends StatelessWidget {
 
   PreferredSizeWidget _appBar(BuildContext context, {required MainViewModel model}) {
     return AppBar(
+      systemOverlayStyle: SystemUiOverlayStyle.light,
       backgroundColor: model.primaryColorTheme,
       title: Row(
         children: [
-          const CustomIcon(
-            IconName.profileUser1,
+          CustomIcon(
+            model.profile(),
             height: 45,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Text(
-              'NAME',
+              model.user?.name ?? 'NAME',
               style: customTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
             ),
           )
@@ -126,7 +138,7 @@ class MainNavigatorBar extends StatelessWidget {
         label: tr('bottom_bar.$lable'),
       );
 
-  Widget _bottomNavigationBar(BuildContext context,{required MainViewModel model}) {
+  Widget _bottomNavigationBar(BuildContext context, {required MainViewModel model}) {
     return SizedBox(
       height: 85,
       child: BottomNavigationBar(
@@ -190,16 +202,38 @@ class MainNavigatorBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var arguments = context.settingsArguments as MainNavigatorBarArguments?;
+
     log('BOTTOM: ${MediaQuery.of(context).viewInsets.bottom}');
     return BaseWidget<MainViewModel>(
       model: MainViewModel(context),
-      onModelReady: (model) {},
+      onModelReady: (model) async {
+        await model.init(init: arguments?.initScreen ?? false);
+        if (!model.isLogin) {
+          Future.delayed(
+            Duration.zero,
+            () async {
+              if (!(await SharePreferenceHelper.getUserLoggedInSharedPreference())) {
+                context.navigatorProvider.pushToSignup();
+              }
+            },
+          );
+        }
+      },
       onPageResume: (model) {},
       builder: (context, model, _) {
+        if (model.busy) {
+          return Container(
+            color: primaryColor(context),
+            child: Center(
+              child: CustomIcon(IconName.profileStaff1, height: 100),
+            ),
+          );
+        }
         return Scaffold(
           appBar: _appBar(context, model: model),
           body: child,
-          bottomNavigationBar: _bottomNavigationBar(context,model: model),
+          bottomNavigationBar: _bottomNavigationBar(context, model: model),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _floatingActionButton(context),
         );

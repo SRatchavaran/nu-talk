@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nutalk/base/base_extension.dart';
+import 'package:nutalk/constant.dart';
 import 'package:nutalk/feature/setting/viewmodel.dart';
 import 'package:nutalk/provider/navigator_provider.dart';
 import 'package:nutalk/widget/icon.dart';
@@ -22,14 +23,14 @@ class SettingScreen extends StatelessWidget {
       builder: (context, model, _) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: model.primaryColorTheme,
+            backgroundColor: primaryColor(context),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 GestureDetector(
                     onTap: () {
-                      model.setTheme();
+                      model.setTheme(context);
                       context.navigatorProvider.pop();
                     },
                     child: Text(
@@ -41,16 +42,13 @@ class SettingScreen extends StatelessWidget {
                     child: Text(
                       tr('setting.title'),
                       style: customTextStyle(
-                        context: context,
-                        typography: TextStyleTypography.mainTextStyle,
-                        fontSize: TextStyleSize.s24
-                      ),
+                          context: context, typography: TextStyleTypography.mainTextStyle, fontSize: TextStyleSize.s24),
                     ),
                   ),
                 ),
                 GestureDetector(
                   onTap: () {
-                    model.save();
+                    model.save(context);
                     context.navigatorProvider.pop();
                   },
                   child: Text(
@@ -64,7 +62,7 @@ class SettingScreen extends StatelessWidget {
             centerTitle: true,
           ),
           body: Container(
-            color: model.secondaryColorTheme,
+            color: secondaryColor(context),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: Form(
@@ -145,7 +143,7 @@ class SettingScreen extends StatelessWidget {
                                     index,
                                     GestureDetector(
                                       onTap: () {
-                                        model.setTheme(index: index + 1);
+                                        model.setTheme(context, index: index + 1);
                                       },
                                       child: CustomIcon(model.themes[index]),
                                     ),

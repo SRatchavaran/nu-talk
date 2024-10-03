@@ -1,3 +1,4 @@
+
 # This file configures the analyzer, which statically analyzes Dart code to
 # check for errors, warnings, and lints.
 #
@@ -7,6 +8,13 @@
 
 # The following line activates a set of recommended lints for Flutter apps,
 # packages, and plugins designed to encourage good coding practices.
+analyzer:
+  errors:
+    sort_child_properties_last: error
+    always_put_required_named_parameters_first: error
+    avoid_type_to_string: error
+    use_build_context_synchronously: ignore
+
 include: package:flutter_lints/flutter.yaml
 
 linter:
@@ -22,6 +30,7 @@ linter:
   # `// ignore_for_file: name_of_lint` syntax on the line or in the file
   # producing the lint.
   rules:
+    - use_build_context_synchronously
     # avoid_print: false  # Uncomment to disable the `avoid_print` rule
     # prefer_single_quotes: true  # Uncomment to enable the `prefer_single_quotes` rule
 

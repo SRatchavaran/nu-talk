@@ -1,23 +1,34 @@
-import 'dart:developer';
-
+import 'package:flutter/material.dart';
+import 'package:nutalk/base/base_extension.dart';
 import 'package:nutalk/base/base_viewmodel.dart';
 import 'package:nutalk/function/validator.dart';
+import 'package:nutalk/model/user/user_model.dart';
+import 'package:nutalk/provider/main_provider.dart';
 
 class SignupViewModel extends BaseViewModel {
+  final MainProvider _mainProvider;
+
+  SignupViewModel(BuildContext context) : _mainProvider = context.provide();
+
   String _password = '';
   String get password => _password;
-  set password(String pass) {
-    _password = pass;
-  }
+
+  String email = '';
+
+  bool isRepeat = false;
 
   String? errEmail;
 
   void checkValidateEmail(String val, {bool busy = true}) {
-    log('EMAIL: $val');
-    if (val != '' && val.isNotEmpty) {
-      errEmail = emailValidator(val);
+    if (!isRepeat) {
+      email = val;
+      if (val != '' && val.isNotEmpty) {
+        errEmail = emailValidator(val);
+      } else {
+        errEmail = null;
+      }
     } else {
-      errEmail = null;
+      isRepeat = false;
     }
     if (busy) {
       notifyListeners();
@@ -27,7 +38,7 @@ class SignupViewModel extends BaseViewModel {
   String? errPassword;
 
   void checkValidatePassword(String val, {bool busy = true}) {
-    password = val;
+    _password = val;
     if (val != '' && val.isNotEmpty) {
       errPassword = passwordValidator(val);
     } else {
@@ -42,7 +53,7 @@ class SignupViewModel extends BaseViewModel {
 
   void checkValidatePasswordComfirm(String val, {bool busy = true}) {
     if (val != '' && val.isNotEmpty) {
-      errPasswordConfirm = confirmPasswordValidator(val, password: password);
+      errPasswordConfirm = confirmPasswordValidator(val, password: _password);
     } else {
       errPasswordConfirm = null;
     }
@@ -50,4 +61,6 @@ class SignupViewModel extends BaseViewModel {
       notifyListeners();
     }
   }
+
+  void setupProfile({required UserModel user}) => _mainProvider.user = user;
 }

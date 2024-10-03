@@ -98,8 +98,8 @@ class TextFieldCustom extends StatelessWidget {
     this.prefixIcon,
     this.autoFocus = false,
     this.obscureText = false,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -110,12 +110,12 @@ class TextFieldCustom extends StatelessWidget {
     var lineColor = showErr
         ? errorColor ?? redColor
         : !enabled
-            ? borderColor ?? black54Color
+            ? borderColor ?? black12Color
             : isFocus
                 ? focusColor ?? primaryTheme1
                 : isError
                     ? errorColor ?? redColor
-                    : borderColor ?? primaryTheme1;
+                    : borderColor ?? black12Color.withOpacity(0.2);
 
     var fillBackgroundColor = !enabled
         ? disableColor ?? black12Color
@@ -124,9 +124,7 @@ class TextFieldCustom extends StatelessWidget {
             : backgroundColor ?? Colors.transparent;
 
     var defaultLabelStyle = customTextStyle(
-      context: context,
-      typography: TextStyleTypography.simpleTextStyle,
-    );
+        context: context, typography: TextStyleTypography.simpleTextStyle, colorFont: TextStyleColor.disableColor);
 
     var defaultFloatingLabelStyle = customTextStyle(
         context: context, typography: TextStyleTypography.smallTextStyle, colorFont: TextStyleColor.disableColor);

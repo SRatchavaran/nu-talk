@@ -1,5 +1,3 @@
 import '../../base/base_viewmodel.dart';
 
-class HomeViewModel extends BaseViewModel{
-
-}
+class HomeViewModel extends BaseViewModel {}

@@ -1,21 +1,19 @@
-
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:nutalk/model/user_model.dart';
+import 'package:nutalk/model/user/user_model.dart';
 
 class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  UserModel? _userFromFirebaseUser(User? user){
-    return user != null ? UserModel(userId: user.uid) : null;
+  UserModel? _userFromFirebaseUser(User? user, String email) {
+    return user != null ? UserModel(userId: user.uid, email: email) : null;
   }
+
   Future signInWithEmailAndPassword(String email, String password) async {
     try {
-      UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
+      UserCredential result = await _auth.signInWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
 
-      return _userFromFirebaseUser(user);
+      return _userFromFirebaseUser(user, email);
     } catch (e) {
-
       return null;
     }
   }
@@ -25,9 +23,8 @@ class AuthService {
       UserCredential result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       User? user = result.user;
 
-      return _userFromFirebaseUser(user);
+      return _userFromFirebaseUser(user, email);
     } catch (e) {
-
       return null;
     }
   }
@@ -39,5 +36,4 @@ class AuthService {
       return null;
     }
   }
-
 }

@@ -16,6 +16,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  WidgetsFlutterBinding.ensureInitialized();
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
     runApp(
