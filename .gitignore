@@ -3,6 +3,7 @@
 *.log
 *.pyc
 *.swp
+*.g.dart
 .DS_Store
 .atom/
 .buildlog/
@@ -26,6 +27,7 @@ migrate_working_dir/
 **/ios/Flutter/.last_build_id
 .dart_tool/
 .fvm/
+.fvm/flutter_sdk/
 .flutter-plugins
 .flutter-plugins-dependencies
 .packages
@@ -43,3 +45,5 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+!Podfile.lock
