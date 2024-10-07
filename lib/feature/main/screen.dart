@@ -95,7 +95,7 @@ class MainNavigatorBar extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Text(
-              model.user?.name ?? 'NAME',
+              model.user?.name ?? 'E',
               style: customTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
             ),
           )
@@ -208,7 +208,7 @@ class MainNavigatorBar extends StatelessWidget {
     return BaseWidget<MainViewModel>(
       model: MainViewModel(context),
       onModelReady: (model) async {
-        await model.init(init: arguments?.initScreen ?? false);
+        await model.init(init: arguments?.initScreen ?? true);
         if (!model.isLogin) {
           Future.delayed(
             Duration.zero,

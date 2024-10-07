@@ -25,7 +25,13 @@ enum IconName {
   theme2,
   theme3,
   theme4,
-  theme5
+  theme5,
+  headMap,
+  mapNU,
+  subMap1,
+  subMap2,
+  subMap3,
+  subMap4
 }
 
 class CustomIcon extends StatelessWidget {
@@ -116,6 +122,24 @@ class CustomIcon extends StatelessWidget {
 
       case IconName.theme5:
         return _pngImage('theme5');
+
+      case IconName.headMap:
+        return _pngImage('map_logo');
+
+      case IconName.mapNU:
+        return _pngImage('map_edit');
+
+      case IconName.subMap1:
+        return _pngImage('head1');
+
+      case IconName.subMap2:
+        return _pngImage('head2');
+
+      case IconName.subMap3:
+        return _pngImage('head3');
+
+      case IconName.subMap4:
+        return _pngImage('head4');
 
       default:
         return Container();
