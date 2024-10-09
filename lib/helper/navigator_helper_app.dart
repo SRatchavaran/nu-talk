@@ -4,6 +4,7 @@ import 'package:nutalk/constant/navigator.dart';
 import 'package:nutalk/feature/authentication/login/screen.dart';
 import 'package:nutalk/feature/authentication/signup/screen.dart';
 import 'package:nutalk/feature/home/screen.dart';
+import 'package:nutalk/feature/kratoo/create_post/screen.dart';
 import 'package:nutalk/feature/kratoo/screen.dart';
 import 'package:nutalk/feature/main/screen.dart';
 import 'package:nutalk/feature/setting/screen.dart';
@@ -16,7 +17,7 @@ import '../feature/note/screen.dart';
 class CustomNavigatorHelperApp {
   static late final GoRouter router;
 
-  GlobalKey<NavigatorState> parentNavigatorKey = GlobalKey<NavigatorState>();
+  GlobalKey<NavigatorState> parentNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'home');
 
   GlobalKey<NavigatorState> homeNavigatorKey = GlobalKey<NavigatorState>();
   GlobalKey<NavigatorState> chatroomNavigatorKey = GlobalKey<NavigatorState>();
@@ -48,12 +49,14 @@ class CustomNavigatorHelperApp {
   static const loginPath = '/login';
   static const setupPeofilePath = 'setup-profile';
 
+  static const createPostPath = 'create-post';
+
   CustomNavigatorHelperApp._internal() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
 
     List<RouteBase> routes = [
       StatefulShellRoute.indexedStack(
-        // parentNavigatorKey: parentNavigatorKey,
+        parentNavigatorKey: parentNavigatorKey,
         branches: [
           StatefulShellBranch(
             navigatorKey: kratooNavigatorKey,
@@ -62,6 +65,14 @@ class CustomNavigatorHelperApp {
                 path: kratooPath,
                 name: NavigatorRouteNameConstans.kratooPath,
                 pageBuilder: (context, state) => getPage(child: const KratooScreen(), state: state),
+                routes: [
+                  GoRoute(
+                    parentNavigatorKey: parentNavigatorKey,
+                    path: createPostPath,
+                    name: NavigatorRouteNameConstans.createPostPath,
+                    pageBuilder: (context, state) => getPage(child: const CreatePostScreen(), state: state),
+                  ),
+                ],
               )
             ],
           ),
@@ -69,6 +80,7 @@ class CustomNavigatorHelperApp {
             navigatorKey: chatroomNavigatorKey,
             routes: [
               GoRoute(
+                parentNavigatorKey: chatroomNavigatorKey,
                 path: chatRoomPath,
                 name: NavigatorRouteNameConstans.chatPath,
                 pageBuilder: (context, state) => getPage(child: const ChatRoomScreen(), state: state),
@@ -79,6 +91,7 @@ class CustomNavigatorHelperApp {
             navigatorKey: homeNavigatorKey,
             routes: [
               GoRoute(
+                parentNavigatorKey: homeNavigatorKey,
                 path: homePath,
                 name: NavigatorRouteNameConstans.homePath,
                 pageBuilder: (context, state) => getPage(child: const HomeScreen(), state: state),
@@ -89,6 +102,7 @@ class CustomNavigatorHelperApp {
             navigatorKey: bookingNavigatorKey,
             routes: [
               GoRoute(
+                parentNavigatorKey: bookingNavigatorKey,
                 path: notePath,
                 name: NavigatorRouteNameConstans.notePath,
                 pageBuilder: (context, state) => getPage(child: const NoteScreen(), state: state),
@@ -99,6 +113,7 @@ class CustomNavigatorHelperApp {
             navigatorKey: noteNavigatorKey,
             routes: [
               GoRoute(
+                parentNavigatorKey: noteNavigatorKey,
                 path: bookingPath,
                 name: NavigatorRouteNameConstans.bookingPath,
                 pageBuilder: (context, state) => getPage(child: const BookingTimeScreen(), state: state),
@@ -110,16 +125,19 @@ class CustomNavigatorHelperApp {
             getPage(child: MainNavigatorBar(child: navigationShell), state: state),
       ),
       GoRoute(
+        // parentNavigatorKey: parentNavigatorKey,
         path: settingPath,
         name: NavigatorRouteNameConstans.settingPath,
         pageBuilder: (context, state) => getPage(child: const SettingScreen(), state: state),
       ),
       GoRoute(
+        // parentNavigatorKey: parentNavigatorKey,
         path: signupPath,
         name: NavigatorRouteNameConstans.signupPath,
         pageBuilder: (context, state) => getPage(child: const SignupScreen(), state: state),
         routes: [
           GoRoute(
+            // parentNavigatorKey: parentNavigatorKey,
             path: setupPeofilePath,
             name: NavigatorRouteNameConstans.setupProfilePath,
             pageBuilder: (context, state) => getPage(child: const SetupProfileScreen(), state: state),
@@ -127,6 +145,7 @@ class CustomNavigatorHelperApp {
         ],
       ),
       GoRoute(
+        // parentNavigatorKey: parentNavigatorKey,
         path: loginPath,
         name: NavigatorRouteNameConstans.loginPath,
         pageBuilder: (context, state) => getPage(child: const SigninScreen(), state: state),
@@ -134,6 +153,7 @@ class CustomNavigatorHelperApp {
     ];
 
     router = GoRouter(
+      navigatorKey: parentNavigatorKey,
       routes: routes,
       initialLocation: homePath,
     );
