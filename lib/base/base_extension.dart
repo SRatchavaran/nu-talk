@@ -30,6 +30,7 @@ extension BuildContextProvider on BuildContext {
       context: this,
       builder: (builderContext) {
         timer = Timer(const Duration(seconds: 3), () {
+          builderContext.unFocusScope();
           Navigator.of(builderContext).pop();
         });
         return AlertDialog(
@@ -45,12 +46,12 @@ extension BuildContextProvider on BuildContext {
                 SizedBox(height: 12),
                 Text(
                   tr('common.alert'),
-                  style: customTextStyle(context: this, typography: TextStyleTypography.headTextStyle),
+                  style: nuTextStyle(context: this, typography: TextStyleTypography.headTextStyle),
                 ),
                 SizedBox(height: 4),
                 Text(
                   tr(msg),
-                  style: customTextStyle(context: this, typography: TextStyleTypography.simpleTextStyle),
+                  style: nuTextStyle(context: this, typography: TextStyleTypography.simpleTextStyle),
                 ),
               ],
             ),

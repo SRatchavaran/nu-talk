@@ -22,6 +22,8 @@ class NavigatorProvider extends ChangeNotifier {
   void pushToSignup() => customNavigatorHelperRouter.goNamed(NavigatorRouteNameConstans.signupPath);
 
   void pushToSignin() => customNavigatorHelperRouter.pushNamed(NavigatorRouteNameConstans.loginPath);
+
+  void pushToCreatePost() => customNavigatorHelperRouter.pushNamed(NavigatorRouteNameConstans.createPostPath);
 }
 
 extension NavigatorProviderContext on BuildContext {

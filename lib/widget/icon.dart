@@ -31,15 +31,16 @@ enum IconName {
   subMap1,
   subMap2,
   subMap3,
-  subMap4
+  subMap4,
+  headCommunity,
 }
 
-class CustomIcon extends StatelessWidget {
+class NUIcon extends StatelessWidget {
   final IconName name;
   final double? width;
   final double? height;
   final Color? color;
-  const CustomIcon(this.name, {this.width, this.height, this.color, super.key});
+  const NUIcon(this.name, {this.width, this.height, this.color, super.key});
 
   Widget _pngImage(String path) {
     return Image.asset('assets/images/$path.png', width: width, height: height, color: color);
@@ -140,6 +141,9 @@ class CustomIcon extends StatelessWidget {
 
       case IconName.subMap4:
         return _pngImage('head4');
+
+      case IconName.headCommunity:
+        return _pngImage('community_logo');
 
       default:
         return Container();

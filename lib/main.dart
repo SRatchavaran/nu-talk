@@ -45,9 +45,6 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
         title: 'NUtalk',
-        // theme: ThemeData(
-        //   primarySwatch: Colors.blue,
-        // ),
         routerConfig: CustomNavigatorHelperApp.router,
         builder: (context, child) => child ?? Container(),
         localizationsDelegates: context.localizationDelegates,

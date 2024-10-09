@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:nutalk/constant.dart';
 
-enum TextStyleColor {
-  primaryColor,
-  secondaryColor,
-  disableColor,
-  errorColor
-}
+enum TextStyleColor { primaryColor, secondaryColor, disableColor, errorColor }
 
-enum TextStyleSize { s12, s16, s17, s19, s20, s24, s45 }
+enum TextStyleSize { s12, s16, s17, s19, s20, s24, s32, s45 }
 
 enum TextStyleWeight { thin, extraLight, light, normal, medium, semiBold, bold, extraBold, black }
 
@@ -87,6 +82,9 @@ extension TextStyleSizeExtension on TextStyleSize {
       case TextStyleSize.s24:
         return 24;
 
+      case TextStyleSize.s32:
+        return 32;
+
       case TextStyleSize.s45:
         return 45;
 
@@ -106,12 +104,13 @@ enum TextStyleTypography {
   smallTextStyle
 }
 
-TextStyle customTextStyle({
+TextStyle nuTextStyle({
   required BuildContext context,
   TextStyleColor? colorFont,
   TextStyleSize? fontSize,
   TextStyleWeight? fontWeight,
   TextStyleTypography? typography,
+  Color? customColor,
 }) {
   TextStyleSize? size;
   Color? color;
@@ -157,7 +156,7 @@ TextStyle customTextStyle({
       break;
   }
   return TextStyle(
-    color: colorFont?.toColor(context) ?? color ?? TextStyleColor.primaryColor.toColor(context),
+    color: customColor ?? colorFont?.toColor(context) ?? color ?? TextStyleColor.primaryColor.toColor(context),
     fontSize: fontSize?.toDouble ?? size?.toDouble,
     fontWeight: fontWeight?.toFontWeight,
   );

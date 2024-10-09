@@ -10,4 +10,6 @@ class NavigatorRouteNameConstans {
   static const signupPath = 'sign_up';
   static const loginPath = 'log_in';
   static const setupProfilePath = 'setup_profile';
+
+  static const createPostPath = 'create_post';
 }

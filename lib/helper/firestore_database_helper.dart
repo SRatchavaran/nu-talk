@@ -4,9 +4,9 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:nutalk/base/base_extension.dart';
+import 'package:nutalk/model/community/post_community_model.dart';
 import 'package:nutalk/model/user/user_model.dart';
 import 'package:nutalk/provider/main_provider.dart';
-// import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 class DatabaseMethods {
   var db = FirebaseFirestore.instance;
@@ -60,8 +60,9 @@ class DatabaseMethods {
         email: user.email,
         type: user.type,
         userId: user.userId,
+        uid: user.uid,
       );
-      mainProvider.user = user;
+      mainProvider.user = model;
       db.collection(usersTable).doc(user.email).update(model.toJson()).catchError((e) {
         log('ERR:$e');
       });
@@ -100,8 +101,8 @@ class DatabaseMethods {
         .then((DocumentReference doc) => log('DocumentSnapshot added with ID: ${doc.id}'));
   }
 
-  addPostCommunity(String postRoomId, postMap) {
-    db.collection(comunityTable).doc(postRoomId).set(postMap).catchError((e) {
+  addPostCommunity({required String postRoomId, required PostCommunityModel postMap}) {
+    db.collection(comunityTable).doc(postRoomId).set(postMap.toJson()).catchError((e) {
       log(e.toString());
     });
   }
@@ -337,7 +338,10 @@ class DatabaseMethods {
     Completer<UserModel?> c = Completer<UserModel?>();
     db.collection(usersTable).where(emailDB, isEqualTo: email).snapshots().listen(
       (event) {
-        UserModel? user = UserModel.fromJson(event.docs.first.data());
+        UserModel? user;
+        if (event.docs.isNotEmpty) {
+          user = UserModel.fromJson(event.docs.first.data());
+        }
         c.complete(user);
       },
       onError: (error) => log("Listen failed: $error"),

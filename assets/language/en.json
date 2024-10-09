@@ -15,7 +15,8 @@
       "input_name": "Please provide your name",
       "repeat_name": "The name is already used. Please provide a new name.",
       "system_err": "System failed. Please try again later."
-    }
+    },
+    "cancle": "Cancle"
   },
   "bottom_bar": {
     "community": "KRATOO",
@@ -51,5 +52,20 @@
     "select_gender": "Select your gender",
     "select_age": "Select your age",
     "username_err": "Your name is incorrect."
+  },
+  "community": {
+    "content": {
+      "head1": "General",
+      "head2": "Learning",
+      "head3": "Relationship",
+      "head4": "Living",
+      "head5": "Finance"
+    },
+    "create": {
+      "description": "Do you want to vent your feelings to your friends? Post it!",
+      "post": "Post",
+      "err_post": "Don't forget to say how you feel first.",
+      "err_tag": "Please select a tag."
+    }
   }
 }

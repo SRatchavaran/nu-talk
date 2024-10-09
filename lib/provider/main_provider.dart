@@ -17,7 +17,7 @@ class MainProvider extends ChangeNotifier {
 
   UserModel? _user;
   UserModel? get user => _user;
-  set user(UserModel? str) => _user = str;
+  set user(UserModel? value) => _user = value;
 
   bool isLogin = false;
   String email = '';

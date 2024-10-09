@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:nutalk/constant.dart';
 import 'package:nutalk/widget/textstyle.dart';
 
-class TextFieldCustom extends StatelessWidget {
+class NUTextField extends StatelessWidget {
   final String? errorText;
   final TextEditingController? controller;
   final TextInputAction? textInputAction;
@@ -51,7 +51,7 @@ class TextFieldCustom extends StatelessWidget {
   final Widget? prefixIcon;
   final bool obscureText;
 
-  const TextFieldCustom({
+  const NUTextField({
     required this.controller,
     this.errorText,
     this.textInputAction,
@@ -123,21 +123,21 @@ class TextFieldCustom extends StatelessWidget {
             ? fillColor ?? backgroundColor ?? Colors.transparent //kPrimaryColor(context).withOpacity(0.1)
             : backgroundColor ?? Colors.transparent;
 
-    var defaultLabelStyle = customTextStyle(
+    var defaultLabelStyle = nuTextStyle(
         context: context, typography: TextStyleTypography.simpleTextStyle, colorFont: TextStyleColor.disableColor);
 
-    var defaultFloatingLabelStyle = customTextStyle(
+    var defaultFloatingLabelStyle = nuTextStyle(
         context: context, typography: TextStyleTypography.smallTextStyle, colorFont: TextStyleColor.disableColor);
 
-    var defaultFocusFloatingLabelStyle = customTextStyle(
+    var defaultFocusFloatingLabelStyle = nuTextStyle(
       context: context,
       typography: TextStyleTypography.smallTextStyle,
     );
 
-    var defaultErrorFloatingLabelStyle = customTextStyle(
+    var defaultErrorFloatingLabelStyle = nuTextStyle(
         context: context, typography: TextStyleTypography.smallTextStyle, colorFont: TextStyleColor.errorColor);
 
-    var defaultHintStyle = customTextStyle(
+    var defaultHintStyle = nuTextStyle(
         context: context, typography: TextStyleTypography.smallTextStyle, colorFont: TextStyleColor.disableColor);
 
     return Material(
@@ -198,7 +198,7 @@ class TextFieldCustom extends StatelessWidget {
                 inputFormatters: inputFormatters,
                 cursorColor: cursorColor ?? primaryTheme1,
                 style: style ??
-                    customTextStyle(
+                    nuTextStyle(
                       context: context,
                       typography: TextStyleTypography.simpleTextStyle,
                     ),
