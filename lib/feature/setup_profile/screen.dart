@@ -62,7 +62,7 @@ class SetupProfileScreen extends StatelessWidget {
               children: [
                 Text(
                   'select profile',
-                  style: customTextStyle(
+                  style: nuTextStyle(
                     context: context,
                     typography: TextStyleTypography.headTextStyle,
                     fontSize: TextStyleSize.s24,
@@ -84,7 +84,7 @@ class SetupProfileScreen extends StatelessWidget {
                             model.profile = item;
                             context.navigatorProvider.pop();
                           },
-                          child: CustomIcon(item, height: 60),
+                          child: NUIcon(item, height: 60),
                         );
                       },
                     ),
@@ -131,7 +131,7 @@ class SetupProfileScreen extends StatelessWidget {
                           children: <Widget>[
                             Text(
                               tr('profile.title'),
-                              style: customTextStyle(
+                              style: nuTextStyle(
                                 context: context,
                                 typography: TextStyleTypography.mainTextStyle,
                               ),
@@ -141,11 +141,11 @@ class SetupProfileScreen extends StatelessWidget {
                               onTap: () => selectProfile(context, model: model),
                               child: Column(
                                 children: [
-                                  CustomIcon(model.profile, height: 100),
+                                  NUIcon(model.profile, height: 100),
                                   const SizedBox(height: 4),
                                   Text(
                                     tr('common.choose_img'),
-                                    style: customTextStyle(
+                                    style: nuTextStyle(
                                       context: context,
                                       typography: TextStyleTypography.smallTextStyle,
                                     ),
@@ -154,14 +154,14 @@ class SetupProfileScreen extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 16),
-                            TextFieldCustom(
+                            NUTextField(
                               controller: usernameEditingController,
                               focusNode: usernameFocusNode,
                               labelText: tr('profile.username_hint'),
                               backgroundColor: whiteColor,
                               errorText: model.errUsername,
                               onChanged: (val) => model.checkValidateUsername(val),
-                              style: customTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
+                              style: nuTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
                             ),
                             const SizedBox(height: 5),
                             Row(
@@ -169,7 +169,7 @@ class SetupProfileScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   tr('profile.select_gender'),
-                                  style: customTextStyle(
+                                  style: nuTextStyle(
                                     context: context,
                                     typography: TextStyleTypography.simpleTextStyle,
                                   ),
@@ -182,8 +182,7 @@ class SetupProfileScreen extends StatelessWidget {
                                     color: primaryColor(context),
                                   ),
                                   elevation: 16,
-                                  style: customTextStyle(
-                                      context: context, typography: TextStyleTypography.simpleTextStyle),
+                                  style: nuTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
                                   underline: Container(
                                     height: 2,
                                     color: primaryColor(context),
@@ -196,7 +195,7 @@ class SetupProfileScreen extends StatelessWidget {
                                       value: value,
                                       child: Text(
                                         value.text,
-                                        style: customTextStyle(
+                                        style: nuTextStyle(
                                             context: context, typography: TextStyleTypography.simpleTextStyle),
                                       ),
                                     );
@@ -210,7 +209,7 @@ class SetupProfileScreen extends StatelessWidget {
                               children: [
                                 Text(
                                   tr('profile.select_age'),
-                                  style: customTextStyle(
+                                  style: nuTextStyle(
                                     context: context,
                                     typography: TextStyleTypography.simpleTextStyle,
                                   ),
@@ -223,8 +222,7 @@ class SetupProfileScreen extends StatelessWidget {
                                     color: primaryColor(context),
                                   ),
                                   elevation: 16,
-                                  style: customTextStyle(
-                                      context: context, typography: TextStyleTypography.simpleTextStyle),
+                                  style: nuTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
                                   underline: Container(
                                     height: 2,
                                     color: primaryColor(context),
@@ -237,7 +235,7 @@ class SetupProfileScreen extends StatelessWidget {
                                       value: value,
                                       child: Text(
                                         value,
-                                        style: customTextStyle(
+                                        style: nuTextStyle(
                                             context: context, typography: TextStyleTypography.simpleTextStyle),
                                       ),
                                     );
@@ -262,7 +260,7 @@ class SetupProfileScreen extends StatelessWidget {
                                 )),
                             child: Text(
                               tr('profile.title'),
-                              style: customTextStyle(context: context, typography: TextStyleTypography.biggerTextStyle),
+                              style: nuTextStyle(context: context, typography: TextStyleTypography.biggerTextStyle),
                               textAlign: TextAlign.center,
                             ),
                           ),

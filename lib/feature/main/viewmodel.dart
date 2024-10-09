@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nutalk/base/base_extension.dart';
 import 'package:nutalk/helper/firestore_database_helper.dart';
+import 'package:nutalk/helper/share_preference_helper.dart';
 import 'package:nutalk/model/user/user_model.dart';
 import 'package:nutalk/provider/main_provider.dart';
 import 'package:nutalk/widget/icon.dart';
@@ -13,8 +14,6 @@ class MainViewModel extends BaseViewModel {
   final MainProvider _mainProvider;
 
   MainViewModel(BuildContext context) : _mainProvider = context.provide();
-
-  Color get primaryColorTheme => _mainProvider.primaryColorTheme;
 
   UserModel? _user;
   UserModel? get user => _user;
@@ -60,6 +59,10 @@ class MainViewModel extends BaseViewModel {
 
     if (_mainProvider.isLogin) {
       user = await DatabaseMethods().getUserByEmail(_mainProvider.email);
+      if (user == null) {
+        _mainProvider.isLogin = false;
+        await SharePreferenceHelper.saveUserLoggedInSharedPreference(false);
+      }
     }
     await Future.delayed(
       Duration(seconds: 2),

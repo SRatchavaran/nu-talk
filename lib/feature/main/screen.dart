@@ -12,7 +12,9 @@ import 'package:nutalk/feature/main/viewmodel.dart';
 import 'package:nutalk/helper/share_preference_helper.dart';
 import 'package:nutalk/provider/navigator_provider.dart';
 import 'package:nutalk/widget/icon.dart';
+import 'package:nutalk/widget/loading_screen.dart';
 import 'package:nutalk/widget/textstyle.dart';
+import 'package:nutalk/widget/user_profile.dart';
 
 class MainNavigatorBarArguments {
   final bool initScreen;
@@ -31,7 +33,7 @@ class MainNavigatorBar extends StatelessWidget {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: model.primaryColorTheme,
+          backgroundColor: primaryColor(context),
           shape: const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(40.0))),
           title: SizedBox(
             width: 200,
@@ -48,10 +50,10 @@ class MainNavigatorBar extends StatelessWidget {
                       },
                     ),
                     items: const [
-                      CustomIcon(IconName.help1),
-                      CustomIcon(IconName.help2),
-                      CustomIcon(IconName.help3),
-                      CustomIcon(IconName.help4)
+                      NUIcon(IconName.help1),
+                      NUIcon(IconName.help2),
+                      NUIcon(IconName.help3),
+                      NUIcon(IconName.help4)
                     ],
                   ),
                 ),
@@ -85,18 +87,18 @@ class MainNavigatorBar extends StatelessWidget {
   PreferredSizeWidget _appBar(BuildContext context, {required MainViewModel model}) {
     return AppBar(
       systemOverlayStyle: SystemUiOverlayStyle.light,
-      backgroundColor: model.primaryColorTheme,
+      backgroundColor: primaryColor(context),
       title: Row(
         children: [
-          CustomIcon(
-            model.profile(),
+          NUIcon(
+            profile(context),
             height: 45,
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: Text(
               model.user?.name ?? 'E',
-              style: customTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
+              style: nuTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
             ),
           )
         ],
@@ -130,7 +132,7 @@ class MainNavigatorBar extends StatelessWidget {
     double? height,
   }) =>
       BottomNavigationBarItem(
-        icon: CustomIcon(
+        icon: NUIcon(
           icon,
           height: height ?? 20,
           color: color,
@@ -140,18 +142,18 @@ class MainNavigatorBar extends StatelessWidget {
 
   Widget _bottomNavigationBar(BuildContext context, {required MainViewModel model}) {
     return SizedBox(
-      height: 85,
+      height: 60,
       child: BottomNavigationBar(
         elevation: 0,
-        selectedLabelStyle: customTextStyle(
+        selectedLabelStyle: nuTextStyle(
             context: context, typography: TextStyleTypography.simpleTextStyle, fontWeight: TextStyleWeight.bold),
-        unselectedLabelStyle: customTextStyle(
+        unselectedLabelStyle: nuTextStyle(
           context: context,
           typography: TextStyleTypography.smallTextStyle,
           colorFont: TextStyleColor.secondaryColor,
         ),
         currentIndex: child.currentIndex,
-        backgroundColor: model.primaryColorTheme,
+        backgroundColor: primaryColor(context),
         type: BottomNavigationBarType.fixed,
         selectedItemColor: whiteColor,
         unselectedItemColor: disableColor,
@@ -187,12 +189,12 @@ class MainNavigatorBar extends StatelessWidget {
   }
 
   Widget _floatingActionButton(BuildContext context) => Padding(
-        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom == 0.0 ? 41 : 23),
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom == 0.0 ? 25 : 20),
         child: Align(
           alignment: Alignment.bottomCenter,
           child: GestureDetector(
             onTap: () => child.goBranch(2, initialLocation: 2 == child.currentIndex),
-            child: const CustomIcon(
+            child: const NUIcon(
               IconName.profileStaff1,
               height: 60,
             ),
@@ -226,13 +228,20 @@ class MainNavigatorBar extends StatelessWidget {
           return Container(
             color: primaryColor(context),
             child: Center(
-              child: CustomIcon(IconName.profileStaff1, height: 100),
+              child: NUIcon(IconName.profileStaff1, height: 100),
             ),
           );
         }
         return Scaffold(
+          resizeToAvoidBottomInset: true,
+          backgroundColor: secondaryColor(context),
           appBar: _appBar(context, model: model),
-          body: child,
+          body: Stack(
+            children: [
+              child,
+              NULoadingScreen(visible: model.user == null),
+            ],
+          ),
           bottomNavigationBar: _bottomNavigationBar(context, model: model),
           floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
           floatingActionButton: _floatingActionButton(context),

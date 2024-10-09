@@ -4,11 +4,7 @@ import 'package:nutalk/base/base_extension.dart';
 import 'package:nutalk/base/base_widget.dart';
 import 'package:nutalk/constant.dart';
 import 'package:nutalk/feature/authentication/login/viewmodel.dart';
-import 'package:nutalk/helper/firestore_database_helper.dart';
-import 'package:nutalk/helper/share_preference_helper.dart';
-import 'package:nutalk/model/user/user_model.dart';
 import 'package:nutalk/provider/navigator_provider.dart';
-import 'package:nutalk/service/auth_service.dart';
 import 'package:nutalk/widget/loading_screen.dart';
 import 'package:nutalk/widget/textfield_input.dart';
 import 'package:nutalk/widget/textstyle.dart';
@@ -52,55 +48,57 @@ class SigninScreen extends StatelessWidget {
                         children: <Widget>[
                           Text(
                             tr('auth.signin'),
-                            style: customTextStyle(
+                            style: nuTextStyle(
                               context: context,
                               typography: TextStyleTypography.mainTextStyle,
                             ),
                           ),
                           const SizedBox(height: 8),
-                          TextFieldCustom(
+                          NUTextField(
                             controller: emailEditingController,
                             focusNode: emailFocusNode,
                             labelText: tr('auth.input_email'),
                             backgroundColor: whiteColor,
                             errorText: model.errEmail,
                             onChanged: (val) => model.checkValidateEmail(val),
-                            style: customTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
+                            style: nuTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
                           ),
                           const SizedBox(height: 5),
-                          TextFieldCustom(
+                          NUTextField(
                             controller: passwordEditingController,
                             focusNode: passwordFocusNode,
                             labelText: tr('auth.input_password'),
                             backgroundColor: whiteColor,
+                            keyboardType: TextInputType.number,
                             errorText: model.errPassword,
                             onChanged: (val) => model.checkValidatePassword(val),
                             obscureText: true,
-                            style: customTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
+                            style: nuTextStyle(context: context, typography: TextStyleTypography.simpleTextStyle),
                           ),
                         ],
                       ),
                       const SizedBox(height: 21),
                       GestureDetector(
-                        onTap: () {
+                        onTap: () async {
                           context.unFocusScope();
-                          model.checkValidateEmail(emailEditingController.text);
-                          model.checkValidatePassword(passwordEditingController.text);
-                          if (model.errEmail == null &&
-                              model.errPassword == null &&
-                              model.email.isNotEmpty &&
-                              model.password.isNotEmpty) {
-                            signup(context, model: model);
+                          bool complete = await model.signin(
+                              email: emailEditingController.text, password: passwordEditingController.text);
+                          if (complete) {
+                            context.navigatorProvider.pushToHome();
                           } else {
-                            var err = '';
-                            if (model.email.isEmpty) {
-                              err = 'auth.input_email_err';
-                              model.errEmail = tr(err);
-                            } else if (model.password.isEmpty) {
-                              err = 'auth.input_password_err';
-                              model.errPassword = tr(err);
+                            if (model.errEmail?.isNotEmpty ?? false) {
+                              context.showToast(msg: model.errEmail ?? '');
+                            } else {
+                              var err = '';
+                              if (model.email.isEmpty) {
+                                err = 'auth.input_email_err';
+                                model.errEmail = tr(err);
+                              } else if (model.password.isEmpty) {
+                                err = 'auth.input_password_err';
+                                model.errPassword = tr(err);
+                              }
+                              context.showToast(msg: err);
                             }
-                            context.showToast(msg: err);
                           }
                         },
                         child: Container(
@@ -116,7 +114,7 @@ class SigninScreen extends StatelessWidget {
                           ),
                           child: Text(
                             tr('auth.signin'),
-                            style: customTextStyle(context: context, typography: TextStyleTypography.biggerTextStyle),
+                            style: nuTextStyle(context: context, typography: TextStyleTypography.biggerTextStyle),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -130,29 +128,6 @@ class SigninScreen extends StatelessWidget {
           ),
         ),
       );
-
-  void signup(BuildContext context, {required SignInViewModel model}) async {
-    context.unFocusScope();
-    ////check user uid before regist
-    // String fcmToken = await firebaseMessaging.getToken();
-    //   databaseMethods.updatefcmToken(Constants.myEmail, fcmToken);
-
-    SharePreferenceHelper.saveUserEmailSharedPreference(model.email);
-    model.busy = true;
-    bool emailIsRepeat = await DatabaseMethods().checkEmail(model.email);
-    if (emailIsRepeat) {
-      await AuthService().signInWithEmailAndPassword(model.email, model.password).then((val) {
-        if (val is UserModel) {
-          SharePreferenceHelper.saveUserLoggedInSharedPreference(true);
-          if (context.mounted) context.navigatorProvider.pushToHome();
-        }
-      });
-    } else {
-      model.errEmail = 'auth.signin_err';
-      context.showToast(msg: 'auth.signin_err');
-    }
-    model.busy = false;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +152,7 @@ class SigninScreen extends StatelessWidget {
                 passwordFocusNode: passwordFocusNode,
                 model: model,
               ),
-              LoadingScreen(visible: model.busy)
+              NULoadingScreen(visible: model.busy)
             ],
           ),
         );
