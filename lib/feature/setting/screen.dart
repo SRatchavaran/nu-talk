@@ -18,7 +18,10 @@ class SettingScreen extends StatelessWidget {
   const SettingScreen({super.key});
 
   PreferredSizeWidget _appbar(BuildContext context, {required SettingViewModel model}) => AppBar(
-        backgroundColor: primaryColor(context, selected: model.theme[model.index - 1]),
+        backgroundColor: primaryColor(
+          context,
+          selected: model.index != 0 ? model.theme[model.index - 1] : null,
+        ),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,7 +75,10 @@ class SettingScreen extends StatelessWidget {
           body: Stack(
             children: [
               Container(
-                color: secondaryColor(context, selected: model.theme[model.index - 1]),
+                color: secondaryColor(
+                  context,
+                  selected: model.index != 0 ? model.theme[model.index - 1] : null,
+                ),
                 width: context.mediaSize.width,
                 height: context.mediaSize.height,
                 child: Column(
@@ -171,14 +177,14 @@ class SettingScreen extends StatelessWidget {
                         NUButton(
                           onTap: () {
                             if (!model.selectedTHLanguage(context)) {
-                              context.setLocale(Locale('TH'));
+                              context.setLocale(Locale(th));
                               ApplicationLanguage.setValue(context, Language.thai);
                             }
                           },
-                          text: 'TH',
+                          text: th,
                           textStyle: nuTextStyle(
                             context: context,
-                            customColor: primartTextColor(context),
+                            customColor: primaryTextColor(context),
                             fontWeight:
                                 model.selectedTHLanguage(context) ? TextStyleWeight.black : TextStyleWeight.light,
                           ),
@@ -189,14 +195,14 @@ class SettingScreen extends StatelessWidget {
                         NUButton(
                           onTap: () {
                             if (model.selectedTHLanguage(context)) {
-                              context.setLocale(Locale('EN'));
+                              context.setLocale(Locale(en));
                               ApplicationLanguage.setValue(context, Language.english);
                             }
                           },
-                          text: 'EN',
+                          text: en,
                           textStyle: nuTextStyle(
                             context: context,
-                            customColor: primartTextColor(context),
+                            customColor: primaryTextColor(context),
                             fontWeight:
                                 !model.selectedTHLanguage(context) ? TextStyleWeight.black : TextStyleWeight.light,
                           ),

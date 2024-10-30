@@ -125,9 +125,12 @@ class MainNavigatorBar extends StatelessWidget {
     );
   }
 
-  BottomNavigationBarItem _contentBottomNavigationBar({
+  BottomNavigationBarItem _contentBottomNavigationBar(
+    BuildContext context, {
     required String lable,
     required IconName icon,
+    required int index,
+    required MainViewModel model,
     Color? color,
     double? height,
   }) =>
@@ -135,7 +138,11 @@ class MainNavigatorBar extends StatelessWidget {
         icon: NUIcon(
           icon,
           height: height ?? 20,
-          color: color,
+          color: model.index == index
+              ? color != null
+                  ? primaryTextColor(context).withOpacity(0.7)
+                  : primaryTextColor(context)
+              : color,
         ),
         label: tr('bottom_bar.$lable'),
       );
@@ -146,7 +153,10 @@ class MainNavigatorBar extends StatelessWidget {
       child: BottomNavigationBar(
         elevation: 0,
         selectedLabelStyle: nuTextStyle(
-            context: context, typography: TextStyleTypography.simpleTextStyle, fontWeight: TextStyleWeight.bold),
+          context: context,
+          typography: TextStyleTypography.smallTextStyle,
+          fontWeight: TextStyleWeight.bold,
+        ),
         unselectedLabelStyle: nuTextStyle(
           context: context,
           typography: TextStyleTypography.smallTextStyle,
@@ -156,32 +166,49 @@ class MainNavigatorBar extends StatelessWidget {
         backgroundColor: primaryColor(context),
         type: BottomNavigationBarType.fixed,
         selectedItemColor: whiteColor,
-        unselectedItemColor: disableColor,
+        unselectedItemColor: primaryTextColor(context),
         items: [
           _contentBottomNavigationBar(
+            context,
             icon: IconName.bottomBarIconCommunity,
             color: blackColor.withOpacity(0.4),
             height: 15,
             lable: 'community',
+            index: 0,
+            model: model,
           ),
           _contentBottomNavigationBar(
+            context,
             icon: IconName.bottomBarIconChat,
+            color: primaryTextColor(context),
             lable: 'chat',
+            index: 1,
+            model: model,
           ),
           _contentBottomNavigationBar(
+            context,
             icon: IconName.profileStaff1,
             lable: 'home',
+            index: 2,
+            model: model,
           ),
           _contentBottomNavigationBar(
+            context,
             icon: IconName.bottomBarIconNote,
             lable: 'note',
+            index: 3,
+            model: model,
           ),
           _contentBottomNavigationBar(
+            context,
             icon: IconName.bottomBarIconBooking,
             lable: 'booking',
+            index: 4,
+            model: model,
           ),
         ],
         onTap: (index) {
+          model.index = index;
           child.goBranch(index, initialLocation: index == child.currentIndex);
         },
       ),

@@ -74,7 +74,7 @@ class CreatePostScreen extends StatelessWidget {
                     context: context,
                     typography: TextStyleTypography.simpleTextStyle,
                     fontWeight: TextStyleWeight.bold,
-                    customColor: primartTextColor(context),
+                    customColor: primaryTextColor(context),
                   ),
                 ),
               ),

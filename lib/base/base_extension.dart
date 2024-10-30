@@ -65,3 +65,20 @@ extension BuildContextProvider on BuildContext {
     });
   }
 }
+
+extension DateTimeConvertor on DateTime {
+  String toFormat({
+    String? locale,
+  }) {
+    bool isLocale = locale != th;
+    String pattern = 'dd MMMM yyyy T H:m ${isLocale ? 'a' : ''}';
+    var dateFormat = DateFormat(pattern, locale);
+    var date = dateFormat.format(this);
+    if (isLocale) {
+      var split = date.split(' ');
+      split[2] = (int.parse(split[2]) + 543).toString();
+      return split.join(' ').replaceAll('T', tr('common.time'));
+    }
+    return date.replaceAll('T', tr('common.time'));
+  }
+}

@@ -5,6 +5,7 @@ import 'package:nutalk/feature/authentication/login/screen.dart';
 import 'package:nutalk/feature/authentication/signup/screen.dart';
 import 'package:nutalk/feature/home/screen.dart';
 import 'package:nutalk/feature/kratoo/create_post/screen.dart';
+import 'package:nutalk/feature/kratoo/detail/screen.dart';
 import 'package:nutalk/feature/kratoo/screen.dart';
 import 'package:nutalk/feature/main/screen.dart';
 import 'package:nutalk/feature/setting/screen.dart';
@@ -38,18 +39,19 @@ class CustomNavigatorHelperApp {
 
   // var isLogin = SharePreferenceHelper.getUserLoggedInSharedPreference();
 
-  static const homePath = '/home';
-  static const chatRoomPath = '/chatroom';
-  static const bookingPath = '/booking';
-  static const notePath = '/note';
-  static const kratooPath = '/kratoo';
-  static const settingPath = '/setting';
+  var homePath = '/home';
+  var chatRoomPath = '/chatroom';
+  var bookingPath = '/booking';
+  var notePath = '/note';
+  var kratooPath = '/kratoo';
+  var settingPath = '/setting';
 
-  static const signupPath = '/signup';
-  static const loginPath = '/login';
-  static const setupPeofilePath = 'setup-profile';
+  var signupPath = '/signup';
+  var loginPath = '/login';
+  var setupPeofilePath = 'setup-profile';
 
-  static const createPostPath = 'create-post';
+  var createPostPath = 'create-post';
+  var detailPostPath = 'detail-post';
 
   CustomNavigatorHelperApp._internal() {
     GoRouter.optionURLReflectsImperativeAPIs = true;
@@ -71,6 +73,12 @@ class CustomNavigatorHelperApp {
                     path: createPostPath,
                     name: NavigatorRouteNameConstans.createPostPath,
                     pageBuilder: (context, state) => getPage(child: const CreatePostScreen(), state: state),
+                  ),
+                  GoRoute(
+                    parentNavigatorKey: parentNavigatorKey,
+                    path: detailPostPath,
+                    name: NavigatorRouteNameConstans.detailPostPath,
+                    pageBuilder: (context, state) => getPage(child: const DetailPostScreen(), state: state),
                   ),
                 ],
               )

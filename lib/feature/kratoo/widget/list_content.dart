@@ -51,7 +51,7 @@ class CommunityContentWidget extends StatelessWidget {
                     textStyle: nuTextStyle(
                       context: context,
                       typography: TextStyleTypography.simpleTextStyle,
-                      customColor: primartTextColor(context),
+                      customColor: primaryTextColor(context),
                       fontWeight: isSelected() ? TextStyleWeight.black : TextStyleWeight.normal,
                     ),
                   ),

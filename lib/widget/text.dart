@@ -6,10 +6,23 @@ class NUText extends StatelessWidget {
   final bool isTranslate;
   final String text;
   final String? customText;
-  const NUText({required this.text, this.isTranslate = true, this.textStyle, this.customText, super.key});
+  final int? maxLines;
+  const NUText({
+    required this.text,
+    this.isTranslate = true,
+    this.textStyle,
+    this.customText,
+    this.maxLines,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Text(isTranslate ? tr(text) + (customText ?? '') : text + (customText ?? ''), style: textStyle);
+    return Text(
+      isTranslate ? tr(text) + (customText ?? '') : text + (customText ?? ''),
+      style: textStyle,
+      maxLines: maxLines,
+      overflow: TextOverflow.ellipsis,
+    );
   }
 }

@@ -12,7 +12,7 @@ class NULoadingScreen extends StatelessWidget {
       child: Container(
         color: black12Color.withOpacity(0.3),
         child: Center(
-          child: CircularProgressIndicator(color: primartTextColor(context)),
+          child: CircularProgressIndicator(color: primaryTextColor(context)),
         ),
       ),
     );

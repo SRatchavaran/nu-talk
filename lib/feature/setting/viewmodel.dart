@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:nutalk/base/base_extension.dart';
+import 'package:nutalk/constant.dart';
 import 'package:nutalk/helper/firestore_database_helper.dart';
 import 'package:nutalk/helper/share_preference_helper.dart';
 import 'package:nutalk/model/user/user_model.dart';
@@ -19,7 +20,7 @@ class SettingViewModel extends BaseViewModel {
 
   UserModel? get user => _mainProvider.user;
 
-  int _index = 1;
+  int _index = 0;
   int get index => _index;
 
   List<IconName> themes = [
@@ -39,7 +40,7 @@ class SettingViewModel extends BaseViewModel {
   ];
 
   void init() {
-    _index = _mainProvider.theme.index + 1;
+    _index = _mainProvider.user?.theme != null ? (_mainProvider.user?.theme ?? 0) : 0;
   }
 
   void setTheme(BuildContext context, {int? index}) {
@@ -52,7 +53,7 @@ class SettingViewModel extends BaseViewModel {
     _mainProvider.setTheme(context, _index, setTheme: true);
   }
 
-  bool selectedTHLanguage(BuildContext context) => context.locale.languageCode.toLowerCase() == 'th';
+  bool selectedTHLanguage(BuildContext context) => context.locale.languageCode.toLowerCase() == th;
 
   Future<void> logout() async {
     busy = true;

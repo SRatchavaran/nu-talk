@@ -1,6 +1,5 @@
 // import 'package:easy_localization/easy_localization.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'package:nutalk/model/community/comment_post_model.dart';
 import 'package:nutalk/network/datetime_converter.dart';
 
 part 'post_community_model.g.dart';
@@ -29,7 +28,8 @@ class PostCommunityModel {
   @JsonKey(name: 'create_time')
   final DateTime createTime;
 
-  final List<CommentPostModel>? comments;
+  @JsonKey(name: 'count_comment', defaultValue: 0)
+  final int? countComment;
 
   PostCommunityModel({
     required this.createTime,
@@ -39,7 +39,7 @@ class PostCommunityModel {
     required this.tag,
     required this.userName,
     required this.userId,
-    this.comments,
+    this.countComment,
   });
 
   factory PostCommunityModel.fromJson(Map<String, dynamic> json) => _$PostCommunityModelFromJson(json);

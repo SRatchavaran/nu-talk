@@ -76,7 +76,7 @@ Color secondaryColor(BuildContext context, {CustomTheme? selected}) {
   }
 }
 
-Color primartTextColor(BuildContext context, {CustomTheme? selected}) {
+Color primaryTextColor(BuildContext context, {CustomTheme? selected}) {
   var theme = selected ??
       context.provide<MainProvider>(listen: false).user?.toTheme() ??
       context.provide<MainProvider>(listen: false).theme;

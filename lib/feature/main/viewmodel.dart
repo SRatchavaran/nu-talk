@@ -22,6 +22,15 @@ class MainViewModel extends BaseViewModel {
     _mainProvider.user = _user;
   }
 
+  int _index = 2;
+  int get index => _index;
+  set index(int value) {
+    if (_index != value) {
+      _index = value;
+      notifyListeners();
+    }
+  }
+
   IconName profile() {
     switch (user?.image) {
       case 1:

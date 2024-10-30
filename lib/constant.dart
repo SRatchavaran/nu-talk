@@ -5,3 +5,4 @@ import 'package:nutalk/base/base_extension.dart';
 import 'package:nutalk/provider/main_provider.dart';
 
 part 'constant/colors.dart';
+part 'constant/language.dart';

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 // External Modules
 import 'package:easy_localization/easy_localization.dart';
+import 'package:nutalk/constant.dart';
 
 enum Language { thai, english }
 
@@ -33,9 +34,9 @@ extension LanguageExtension on Language {
   String get code {
     switch (this) {
       case Language.thai:
-        return 'th';
+        return th;
       default:
-        return 'en';
+        return en;
     }
   }
 }
@@ -56,7 +57,7 @@ class ApplicationLanguage {
   static void initLanguage(BuildContext context) {
     var locale = context.locale;
     switch (locale.languageCode) {
-      case 'th':
+      case th:
         _currentLanguage = Language.thai;
         break;
       default:

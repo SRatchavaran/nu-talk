@@ -113,7 +113,7 @@ class DatabaseMethods {
     });
   }
 
-  updateCountComment(String postRoomId, int countComment) async {
+  updateCountComment({required String postRoomId, required int countComment}) async {
     return db.collection(comunityTable).doc(postRoomId).update({
       'countComment': countComment,
     });
@@ -324,6 +324,24 @@ class DatabaseMethods {
         .where("postBy")
         .orderBy(datetimeDB, descending: true)
         .snapshots();
+  }
+
+  Future<List<PostCommunityModel>?> getCommunityPost({int limit = 10}) async {
+    Completer<List<PostCommunityModel>?> c = Completer<List<PostCommunityModel>?>();
+    db.collection(comunityTable).orderBy('create_time', descending: true).limit(limit).snapshots().listen(
+      (event) {
+        List<PostCommunityModel>? value;
+        if (event.docs.isNotEmpty) {
+          value = [];
+          for (var doc in event.docs) {
+            value.add(PostCommunityModel.fromJson(doc.data()));
+          }
+        }
+        c.complete(value);
+      },
+      onError: (error) => log("Listen failed: $error"),
+    );
+    return c.future;
   }
 
   getUsers() async {

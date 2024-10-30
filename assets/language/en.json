@@ -16,7 +16,8 @@
       "repeat_name": "The name is already used. Please provide a new name.",
       "system_err": "System failed. Please try again later."
     },
-    "cancle": "Cancle"
+    "cancle": "Cancle",
+    "time": "at"
   },
   "bottom_bar": {
     "community": "KRATOO",
@@ -66,6 +67,7 @@
       "post": "Post",
       "err_post": "Don't forget to say how you feel first.",
       "err_tag": "Please select a tag."
-    }
+    },
+    "enter_post": "Say something here"
   }
 }

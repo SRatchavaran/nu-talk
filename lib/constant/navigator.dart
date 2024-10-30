@@ -12,4 +12,5 @@ class NavigatorRouteNameConstans {
   static const setupProfilePath = 'setup_profile';
 
   static const createPostPath = 'create_post';
+  static const detailPostPath = 'detail_post';
 }

@@ -33,6 +33,7 @@ enum IconName {
   subMap3,
   subMap4,
   headCommunity,
+  iconComment,
 }
 
 class NUIcon extends StatelessWidget {
@@ -144,6 +145,9 @@ class NUIcon extends StatelessWidget {
 
       case IconName.headCommunity:
         return _pngImage('community_logo');
+
+      case IconName.iconComment:
+        return _pngImage('comment.PNG');
 
       default:
         return Container();
